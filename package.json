@@ -1,0 +1,10 @@
+{
+    "name": "GiTA",
+    "version": "1.0.0",
+    "description": "A Git Tool for Students",
+    "main": "main.js",
+    "repository": "https://github.com/SwapnilShahGit/GiTA",
+    "dependencies": {
+        "gitgraph.js": "^1.11.4"
+    }
+}
