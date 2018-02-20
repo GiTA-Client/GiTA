@@ -3,15 +3,22 @@
     "version": "1.0.0",
     "description": "A Git Tool for Students",
     "main": "main.js",
+    "scripts": {
+        "start": "electron ."
+    },
     "repository": "https://github.com/SwapnilShahGit/GiTA",
+    "keywords": [
+        "Electron"
+    ],
     "devDependencies": {
         "electron": "~1.7.8",
         "electron-rebuild": "^1.7.3"
     },
     "dependencies": {
-        "gitgraph.js": "^1.11.4",
         "express": "^4.16.2",
         "getopts": "^2.0.0",
+        "gitgraph.js": "^1.11.4",
+        "jquery": "^3.3.1",
         "keycode-js": "^1.0.0",
         "node-pty": "^0.7.4",
         "xterm": "^3.0.2"

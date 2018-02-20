@@ -1,0 +1,92 @@
+body {
+    background: #00204E;
+    -webkit-app-region: drag;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+#wrapper {
+    padding-bottom: 135px;
+    width: 650px;
+    float: left;
+    height: 430px;
+        transform: rotate(180deg);
+}
+
+#uoft {
+    position: absolute;
+    padding-left: 520px;
+    padding-top: 533px;
+    user-select: none;
+}
+
+#logo {
+    text-align: center;
+    padding-top: 80px;
+    padding-left: 200px;
+    position: absolute;
+    user-select: none;
+}
+
+.cls-1 {
+    fill: none;
+    stroke: #ffffff;
+    stroke-miterlimit: 10;
+    stroke-width: 6px;
+}
+
+.low-mid {
+    stroke: #4f90c9;
+}
+
+.middle {
+    stroke: #377BB5;
+    z-index: 255;
+}
+
+.top {
+    stroke: #306a9c;
+    z-index: 5;
+}
+
+.bottom {
+    stroke: #8ab5db;
+}
+
+.share-circle {
+    stroke: #d8e6f3;
+}
+
+h1 {
+    font-weight: normal;
+    font-size: 40px;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+h1 span {
+    font-size: 13px;
+    display: block;
+    padding-left: 4px;
+}
+
+p a {
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+    color: #fff;
+    padding: 5px 10px;
+    margin: 0 5px;
+    background-color: #b83729;
+    transition: all 0.2s ease-in;
+}
+
+p a:hover {
+    background-color: #ab3326;
+}
+
+@keyframes undash {
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
