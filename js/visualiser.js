@@ -2,7 +2,7 @@ const { execSync } = require('child_process');
 const { randomBytes } = require('crypto');
 
 const GIT_LOG_COMMAND = 'git log --pretty="%aN <%aE>@@%aI@@%h@@%s@@%D@@%p"';
-const GIT_PATH = '/path/to/git/project';
+const GIT_PATH = './';
 
 const AUTHOR_INDEX = 0;
 const DATE_INDEX = 1;

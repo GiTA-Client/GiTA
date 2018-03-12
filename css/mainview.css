@@ -1,0 +1,153 @@
+body {
+    background: #306a9c;
+    padding: 0;
+    margin: 0;
+}
+
+.frame {
+    position: absolute;
+    border: 1px solid #333;
+    background: black;
+    box-shadow: 0 1px 10px #111;
+    border-radius: 3px;
+    z-index: 10;
+    overflow: auto;
+}
+
+.topbar {
+    border-radius: 3px 3px 0 0;
+    padding: 5px;
+    text-align: right;
+    cursor: default;
+}
+
+.xbtn, .maxbtn {
+    padding: 2px 4px;
+    text-align: center;
+    border-radius: 2px;
+    color: #333;
+    display: inline-block;
+    zoom: 1.0;
+    vertical-align: top;
+    font-family: 'Days One', sans-serif;
+    font-size: 16px;
+    margin-top: -3px;
+}
+
+.swatches {
+    float: left;
+    background: #333;
+}
+
+.swatches span {
+    display: block;
+    float: left;
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.red {
+    background: #ffffff;
+}
+
+.orange {
+    background: #4f90c9;
+}
+
+.yellow {
+    background: #377BB5;
+}
+
+.green {
+    background: #306a9c;
+}
+
+.blue {
+    background: #8ab5db;
+}
+
+.black {
+    background: #d8e6f3;
+}
+
+.maxbtn span {
+    display: block;
+    border: 1px solid #333;
+    border-top: 2px solid #333;
+    width: 9px;
+    height: 8px;
+    margin-top: 6px;
+}
+
+.maxbtn:hover span, .maximized .maxbtn span {
+    border-color: #e7e7e7;
+}
+
+.xbtn:hover {
+    color: #e7e7e7;
+}
+
+.content {
+    height: auto;
+    width: auto;
+    padding: 10px;
+}
+
+.content>div {
+    width: inherit;
+    height: inherit;
+}
+
+.content>webview {
+    width: inherit;
+    height: inherit;
+}
+
+webview {
+    width: 700px;
+    max-height: 600px;
+    min-height: 600px;
+}
+
+.active {
+    z-index: 999999;
+}
+
+#terminal {
+    top: 590px;
+    left: 40px;
+}
+
+#visualiser {
+    top: 10px;
+    left: 40px;
+}
+
+#terminal .content {
+    width: 1300px;
+    height: 200px;
+    background: black;
+}
+
+#visualiser .content {
+    width: 1300px;
+    height: 510px;
+    background: black;
+}
+
+.frame.maximized {
+    top: 1% !important;
+    left: 1% !important;
+    width: 98% !important;
+    height: 98% !important;
+    transition: width .25s linear, height .25s linear, top .25s linear, left .25s linear;
+}
+
+.frame.maximized .content {
+    margin: 0 auto !important;
+    width: 95% !important;
+    height: 95% !important;
+    transition: width .25s linear, height .25s linear, top .25s linear, left .25s linear;
+}
