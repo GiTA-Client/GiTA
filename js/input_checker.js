@@ -1,20 +1,19 @@
 const getopts = require('getopts');
+const messagebus = require('./js/messagebus');
 
 let prompt = ['$', '#', '+'];
 
 /**
- * Returns true if the given command is safe to execute in a shell
+ * Check if commands are safe, send message blocking terminal if not
  * @param {string} command A command to execute in a shell
- * @return {boolean} Whether command is safe to execute
  */
 function inputChecker(command) {
     let trimCmd = removePrompt(command);
     let safetyCheck = gitCheckForce(trimCmd);
     if (!safetyCheck.pass) {
         console.log(safetyCheck.errMsg);
-        return false;
+        messagebus.sendMessage("block", "terminal");
     }
-    return true;
 }
 
 /**
@@ -67,3 +66,5 @@ function gitCheckForce(command) {
     }
     return result;
 }
+
+messagebus.subscribe(inputChecker, "command");

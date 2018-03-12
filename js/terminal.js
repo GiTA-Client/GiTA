@@ -3,6 +3,7 @@ const pty = require('node-pty');
 const Terminal = require('xterm').Terminal;
 const fit = require('xterm/lib/addons/fit/fit');
 const KeyCode = require('keycode-js');
+const messagebus = require('./js/messagebus');
 
 // Initialize a shell process
 let shell = process.env[os.platform() === 'win32' ? 'COMSPEC' : 'SHELL'];
@@ -18,6 +19,21 @@ let xterm = new Terminal({
     cursorBlink: true,
 });
 
+let isBlocked = false;
+
+/**
+ * Handle messages from the messagebus
+ *
+ * @param {string} message Received message
+ */
+function handleMessage(message) {
+    if (message === "block") {
+        isBlocked = true;
+    }
+}
+
+messagebus.subscribe(handleMessage, "terminal");
+
 xterm.open(document.getElementById('terminal'));
 fit.fit(xterm);
 
@@ -31,8 +47,11 @@ xterm.on('data', (data) => {
             return arrElement[1];
         }).join("");
 
-        if (inputChecker(currLine) == true) {
+        messagebus.sendMessage(currLine, "command");
+        if (!isBlocked) {
             ptyProcess.write(data);
+        } else {
+            isBlocked = false;
         }
     } else { // If user didn't press enter, pass the input to the shell
         ptyProcess.write(data);
