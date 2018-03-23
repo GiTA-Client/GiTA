@@ -37,9 +37,6 @@ Interactive Terminal: Users can use this tool to assist in commands and be given
 
 
 ## Setup
-
-**Post Dependencies Here**
-
 0. Clone the repository.
 
   ```
@@ -58,6 +55,13 @@ Interactive Terminal: Users can use this tool to assist in commands and be given
   ```
   $ npm start
   ```
+## To Package for Release
+  ```
+  $ npm install electron-packager
+  $ electron-packager . --platform all
+  ```
+  
+  Further information can be found here: https://www.npmjs.com/package/electron-packager
 
 ## Contact
 
