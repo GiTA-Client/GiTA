@@ -1,18 +1,22 @@
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
+const ipcMain = require('electron').ipcMain;
 
 
 const path = require('path');
 const url = require('url');
-const { ipcMain } = require('electron');
 
-let mainWindow;
+let welcomeWindow;
 
-function createWindow() {
+function createWelcomeWindow() {
     welcomeWindow = new BrowserWindow({
-        width: 700, height: 600,
-        frame: false, "node-integration": true
+        width: 700,
+        height: 600,
+        frame: false,
+        resizable: false,
+        titleBarStyle: 'customButtonsOnHover',
+        "node-integration": true
     });
 
     welcomeWindow.loadURL(url.format({
@@ -21,10 +25,26 @@ function createWindow() {
         slashes: true
     }));
 
-    welcomeWindow.on('closed', function () {
+    welcomeWindow.on('welcomeWindowClosed', function () {
         welcomeWindow = null;
     });
+}
 
+app.on('ready', createWelcomeWindow);
+
+app.on('window-all-closed', function () {
+    if (process.platform !== 'darwin') {
+        app.quit();
+    }
+});
+
+app.on('activate', function () {
+    if (mainWindow === null) {
+        createWelcomeWindow();
+    }
+});
+
+ipcMain.on('open-main-window', () => {
     var screenElectron = electron.screen;
     var mainScreen = screenElectron.getPrimaryDisplay();
     var dimensions = mainScreen.size;
@@ -32,8 +52,10 @@ function createWindow() {
     mainHeight = Math.ceil(dimensions.height * .95);
 
     mainWindow = new BrowserWindow({
-        width: mainWidth, height: mainHeight,
-        "node-integration": true, draggable: false,
+        width: mainWidth,
+        height: mainHeight,
+        "node-integration": true,
+        draggable: false,
         frame: true
     });
 
@@ -48,18 +70,4 @@ function createWindow() {
     mainWindow.on('closed', function () {
         mainWindow = null;
     });
-}
-
-app.on('ready', createWindow);
-
-app.on('window-all-closed', function () {
-    if (process.platform !== 'darwin') {
-        app.quit();
-    }
-});
-
-app.on('activate', function () {
-    if (mainWindow === null) {
-        createWindow();
-    }
 });

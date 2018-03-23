@@ -15,6 +15,7 @@
         "electron-rebuild": "^1.7.3"
     },
     "dependencies": {
+        "electron-config": "^1.0.0",
         "express": "^4.16.2",
         "getopts": "^2.0.0",
         "gitgraph.js": "^1.11.4",

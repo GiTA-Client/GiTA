@@ -20,6 +20,32 @@ body {
     user-select: none;
 }
 
+#openButtonContainer {
+    padding-left: 252px;
+    position: absolute;
+    padding-top: 200px;
+    display: block
+}
+
+#openButton {
+    z-index: 1000;
+    display: block
+}
+
+input[type=button] {
+    opacity: 0.95;
+    position: absolute;
+    width: 80%;
+    background-color: #095F0A;
+    color: #d8e6f3;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 0px;
+    cursor: pointer;
+    outline: none;
+}
+
 #logo {
     text-align: center;
     padding-top: 80px;

@@ -1,3 +1,11 @@
+let app = require('electron').remote;
+let dialog = app.dialog;
+let fs = require('fs');
+
+const Config = require('electron-config');
+const config = new Config();
+const ipcRenderer = require('electron').ipcRenderer;
+
 let tools = {
     getLineLength: function (el) {
         let x1 = el.getAttribute('x1');
@@ -59,3 +67,15 @@ document.querySelectorAll('.bottom').forEach(function (el, i) {
 document.querySelectorAll('.low-mid').forEach(function (el, i) {
     tools.setDashStyles(el, i, 3);
 });
+
+document.getElementById('openButton').onclick = () => {
+    let path = dialog.showOpenDialog({
+        properties: ['openDirectory', 'showHiddenFiles'],
+    })
+    if (path == undefined) {
+        alert('Please select a valid folder!');
+    } else {
+        config.set('path', path);
+        ipcRenderer.send('open-main-window');
+    }
+}
