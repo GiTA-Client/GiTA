@@ -4,7 +4,7 @@ $('.frame').mousedown(function () {
 });
 $('.frame').not(".maximized").resizable({
     alsoResize: ".active .content",
-    minWidth: 200,
+    minWidth: 50,
     minHeight: 59
 }).draggable({
     handle: ".topbar"

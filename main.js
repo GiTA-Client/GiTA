@@ -2,6 +2,7 @@ const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
+
 const path = require('path');
 const url = require('url');
 const { ipcMain } = require('electron');
@@ -24,8 +25,14 @@ function createWindow() {
         welcomeWindow = null;
     });
 
+    var screenElectron = electron.screen;
+    var mainScreen = screenElectron.getPrimaryDisplay();
+    var dimensions = mainScreen.size;
+    mainWidth = Math.ceil(dimensions.width * .95);
+    mainHeight = Math.ceil(dimensions.height * .95);
+
     mainWindow = new BrowserWindow({
-        width: 1400, height: 1200,
+        width: mainWidth, height: mainHeight,
         "node-integration": true, draggable: false,
         frame: true
     });
