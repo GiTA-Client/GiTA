@@ -21,7 +21,8 @@ body {
     cursor: default;
 }
 
-.xbtn, .maxbtn {
+.xbtn,
+.maxbtn {
     padding: 2px 4px;
     text-align: center;
     border-radius: 2px;
@@ -81,7 +82,8 @@ body {
     margin-top: 6px;
 }
 
-.maxbtn:hover span, .maximized .maxbtn span {
+.maxbtn:hover span,
+.maximized .maxbtn span {
     border-color: #e7e7e7;
 }
 
@@ -105,35 +107,29 @@ body {
     height: inherit;
 }
 
-webview {
-    width: 700px;
-    max-height: 600px;
-    min-height: 600px;
-}
-
 .active {
     z-index: 999999;
 }
 
 #terminal {
-    top: 590px;
-    left: 40px;
+    top: 60vh;
+    left: 5vh;
 }
 
 #visualiser {
-    top: 10px;
-    left: 40px;
+    top: 2vh;
+    left: 5vh;
 }
 
 #terminal .content {
-    width: 1300px;
-    height: 200px;
+    width: 150vh;
+    height: 30vh;
     background: black;
 }
 
 #visualiser .content {
-    width: 1300px;
-    height: 510px;
+    width: 150vh;
+    height: 50vh;
     background: black;
 }
 
