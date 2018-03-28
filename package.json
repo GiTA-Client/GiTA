@@ -17,6 +17,7 @@
     "dependencies": {
         "electron-config": "^1.0.0",
         "express": "^4.16.2",
+        "feather-icons": "^4.7.0",
         "getopts": "^2.0.0",
         "gitgraph.js": "^1.11.4",
         "jquery": "^3.3.1",

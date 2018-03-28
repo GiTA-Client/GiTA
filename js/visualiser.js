@@ -5,7 +5,6 @@ const Config = require('electron-config');
 
 const GIT_LOG_COMMAND = 'git log --pretty="%aN <%aE>@@%aI@@%h@@%s@@%D@@%p"';
 const config = new Config();
-console.log(config.get('path'));
 const GIT_PATH = config.get('path');
 
 const AUTHOR_INDEX = 0;

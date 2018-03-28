@@ -2,12 +2,12 @@ const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const ipcMain = require('electron').ipcMain;
-
-
 const path = require('path');
 const url = require('url');
 
 let welcomeWindow;
+let mainWindow;
+let contributionWindow;
 
 function createWelcomeWindow() {
     welcomeWindow = new BrowserWindow({
@@ -30,21 +30,7 @@ function createWelcomeWindow() {
     });
 }
 
-app.on('ready', createWelcomeWindow);
-
-app.on('window-all-closed', function () {
-    if (process.platform !== 'darwin') {
-        app.quit();
-    }
-});
-
-app.on('activate', function () {
-    if (mainWindow === null) {
-        createWelcomeWindow();
-    }
-});
-
-ipcMain.on('open-main-window', () => {
+function createMainWindow() {
     var screenElectron = electron.screen;
     var mainScreen = screenElectron.getPrimaryDisplay();
     var dimensions = mainScreen.size;
@@ -70,4 +56,54 @@ ipcMain.on('open-main-window', () => {
     mainWindow.on('closed', function () {
         mainWindow = null;
     });
+}
+
+function createContributionWindow() {
+    let screenElectron = electron.screen;
+    let mainScreen = screenElectron.getPrimaryDisplay();
+    let dimensions = mainScreen.size;
+    contributionWidth = Math.ceil(dimensions.width * .75);
+    contributionHeight = Math.ceil(dimensions.height * .75);
+
+    contributionWindow = new BrowserWindow({
+        width: contributionWidth,
+        height: contributionHeight,
+        "node-integration": true,
+        draggable: true,
+        frame: true
+    });
+
+    contributionWindow.setMenu(null);
+
+    contributionWindow.loadURL(url.format({
+        pathname: path.join(__dirname, './output/index.html'),
+        protocol: 'file:',
+        slashes: true
+    }));
+
+    contributionWindow.on('closed', function () {
+        contributionWindow = null;
+    });
+}
+
+ipcMain.on('open-contribution-window', () => {
+    createContributionWindow();
+});
+
+ipcMain.on('open-main-window', () => {
+    createMainWindow();
+});
+
+app.on('ready', createWelcomeWindow);
+
+app.on('window-all-closed', function () {
+    if (process.platform !== 'darwin') {
+        app.quit();
+    }
+});
+
+app.on('activate', function () {
+    if (mainWindow === null) {
+        createWelcomeWindow();
+    }
 });
