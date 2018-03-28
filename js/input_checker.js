@@ -1,5 +1,7 @@
+const remote = require('electron').remote;
+
 const getopts = require('getopts');
-const messagebus = require('./js/messagebus');
+const messagebus = remote.require('./js/messagebus');
 
 let prompt = ['$', '#', '+'];
 

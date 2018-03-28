@@ -1,9 +1,11 @@
+const remote = require('electron').remote;
+
 const os = require('os');
 const pty = require('node-pty');
 const Terminal = require('xterm').Terminal;
 const fit = require('xterm/lib/addons/fit/fit');
 const KeyCode = require('keycode-js');
-const messagebus = require('./js/messagebus');
+const messagebus = remote.require('./js/messagebus');
 
 // Initialize a shell process
 let shell = process.env[os.platform() === 'win32' ? 'COMSPEC' : 'SHELL'];
