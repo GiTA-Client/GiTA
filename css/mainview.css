@@ -116,6 +116,13 @@ body {
     left: 5vh;
 }
 
+#contributionviewicon {
+    background: #306a9c;
+    position: absolute;
+    left: 159vh;
+    outline: #306a9c;
+}
+
 #visualiser {
     top: 2vh;
     left: 5vh;
