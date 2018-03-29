@@ -48,3 +48,8 @@ document.getElementById('contributionviewicon').onclick = () => {
     ptyProcess.write(runGitstatsCommand);
     setTimeout(ipcRenderer.send('open-contribution-window'), 3000);
 }
+
+const webviews = document.querySelectorAll('webview');
+webviews.forEach(wv => wv.addEventListener('console-message', (e) => {
+  console.log(e.message)
+}));
