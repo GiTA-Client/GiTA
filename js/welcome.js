@@ -75,7 +75,7 @@ document.getElementById('openButton').onclick = () => {
     if (path == undefined) {
         alert('Please select a valid folder!');
     } else {
-        config.set('path', path);
+        config.set('path', path[0]);
         ipcRenderer.send('open-main-window');
     }
 }
