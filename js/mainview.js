@@ -3,7 +3,14 @@ const contributionPty = require('node-pty');
 const Config = require('electron-config');
 const ipcRenderer = require('electron').ipcRenderer;
 
+const config = new Config();
+const GIT_PATH = config.get('path');
+let outputFolderPath =  " " + GIT_PATH + "/.gita/output";
+let runGitstatsCommand = "lib/gitastats/gitstats " + GIT_PATH + outputFolderPath + "\n";
+
+
 feather.replace()
+setTimeout(generateContribution(), 0);
 
 $('.frame').mousedown(function () {
     $(".active").removeClass("active");
@@ -30,9 +37,7 @@ $('.xbtn').click(function () {
     $(this).parent().parent().remove();
 });
 
-
-document.getElementById('contributionviewicon').onclick = () => {
-    // Initialize a shell process
+function generateContribution () {
     let shell = process.env[contributionOS.platform() === 'win32' ? 'COMSPEC' : 'SHELL'];
 
     let ptyProcess = contributionPty.spawn(shell, [], {
@@ -40,13 +45,11 @@ document.getElementById('contributionviewicon').onclick = () => {
         cwd: process.cwd(),
         env: process.env
     });
-
-    const config = new Config();
-    const GIT_PATH = config.get('path');
-    let runGitstatsCommand = "lib/gitastats/gitstats " + GIT_PATH + " .gita/output\n";
-
     ptyProcess.write(runGitstatsCommand);
-    setTimeout(ipcRenderer.send('open-contribution-window'), 3000);
+}
+
+document.getElementById('contributionviewicon').onclick = () => {
+    ipcRenderer.send('open-contribution-window');
 }
 
 const webviews = document.querySelectorAll('webview');

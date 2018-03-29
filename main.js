@@ -4,7 +4,10 @@ const BrowserWindow = electron.BrowserWindow;
 const ipcMain = require('electron').ipcMain;
 const path = require('path');
 const url = require('url');
+const Config = require('electron-config');
 
+const config = new Config();
+const GIT_PATH = config.get('path');
 let welcomeWindow;
 let mainWindow;
 let contributionWindow;
@@ -76,7 +79,7 @@ function createContributionWindow() {
     contributionWindow.setMenu(null);
 
     contributionWindow.loadURL(url.format({
-        pathname: path.join(__dirname, '.gita/output/index.html'),
+        pathname: path.join(GIT_PATH, '/.gita/output/index.html'),
         protocol: 'file:',
         slashes: true
     }));
