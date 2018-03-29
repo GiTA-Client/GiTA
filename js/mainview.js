@@ -43,7 +43,7 @@ document.getElementById('contributionviewicon').onclick = () => {
 
     const config = new Config();
     const GIT_PATH = config.get('path');
-    let runGitstatsCommand = "lib/gitastats/./gitstats " + GIT_PATH + " ./output\n";
+    let runGitstatsCommand = "lib/gitastats/gitstats " + GIT_PATH + " .gita/output\n";
 
     ptyProcess.write(runGitstatsCommand);
     setTimeout(ipcRenderer.send('open-contribution-window'), 3000);

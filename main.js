@@ -76,7 +76,7 @@ function createContributionWindow() {
     contributionWindow.setMenu(null);
 
     contributionWindow.loadURL(url.format({
-        pathname: path.join(__dirname, './output/index.html'),
+        pathname: path.join(__dirname, '.gita/output/index.html'),
         protocol: 'file:',
         slashes: true
     }));
