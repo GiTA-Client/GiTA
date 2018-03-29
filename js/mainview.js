@@ -5,7 +5,9 @@ const ipcRenderer = require('electron').ipcRenderer;
 
 const config = new Config();
 const GIT_PATH = config.get('path');
-let runGitstatsCommand = "lib/gitastats/gitstats " + GIT_PATH + " .gita/output\n";
+let outputFolderPath =  " " + GIT_PATH + "/.gita/output";
+let runGitstatsCommand = "lib/gitastats/gitstats " + GIT_PATH + outputFolderPath + "\n";
+
 
 feather.replace()
 setTimeout(generateContribution(), 0);
