@@ -35,12 +35,17 @@ function handleMessage(message, type) {
     if (type === 'terminal') {
         if (message === "block") {
             isBlocked = true;
+            errorMessage = 'echo "Error"'
         }
+    } else if (type === 'newcommand') {
+        isBlocked = true;
+        errorMessage = message;
     }
     receiveCount += 1;
     runCommand();
 }
 
+messagebus.subscribe(handleMessage, "newcommand");
 messagebus.subscribe(handleMessage, "terminal");
 
 xterm.open(document.getElementById('terminal'));
@@ -69,13 +74,12 @@ xterm.on('data', (data) => {
  * Print error otherwise.
  */
 function runCommand() {
-    if (receiveCount < 1) return;
+    if (receiveCount < 2) return;
     if (!isBlocked) {
         ptyProcess.write('\n');
     } else {
         let backspaces = Array(commandToExecute.length).join('\b');
-        ptyProcess.write(backspaces)
-        errorMessage = '\n\rError';
+        ptyProcess.write(backspaces + errorMessage + '+');
         isBlocked = false;
     }
     receiveCount = -1;
@@ -83,10 +87,13 @@ function runCommand() {
 
 // Send the shell output to the front end
 ptyProcess.on('data', (data) => {
-    xterm.write(data);
     if (errorMessage) {
-        xterm.write(errorMessage);
-        errorMessage = null;
-        ptyProcess.write('\n');
+        if (data.endsWith('+')) {
+            errorMessage = null;
+            xterm.write(' ');
+            ptyProcess.write('\b\n')
+        }
+    } else {
+        xterm.write(data);
     }
 });
