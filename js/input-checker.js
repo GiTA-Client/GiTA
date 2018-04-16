@@ -15,6 +15,8 @@ function inputChecker(command) {
     if (!safetyCheck.pass) {
         console.log(safetyCheck.errMsg);
         messagebus.sendMessage("block", "terminal");
+    } else {
+        messagebus.sendMessage("unblock", "terminal")
     }
 }
 
