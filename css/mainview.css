@@ -107,6 +107,13 @@ body {
     height: inherit;
 }
 
+.hidden-module {
+    height: 0;
+    width: 0;
+    border: 0;
+    visibility: hidden;
+}
+
 .active {
     z-index: 999999;
 }

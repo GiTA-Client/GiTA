@@ -9,48 +9,53 @@
 </head>
 
 <body>
-    <button class="btn" id="contributionviewicon"><i data-feather="eye"></i></button>
+    <button class="btn" id="contributionviewicon">
+        <i data-feather="eye"></i>
+    </button>
 
     <div class="frame" id="terminal">
-            <div class="topbar blue">
-                <div class="swatches">
-                    <span class="red"></span>
-                    <span class="orange"></span>
-                    <span class="yellow"></span>
-                    <span class="green"></span>
-                    <span class="blue"></span>
-                </div>
-                <div class="maxbtn">
-                    <span></span>
-                </div>
-                <div class="xbtn">x</div>
+        <div class="topbar blue">
+            <div class="swatches">
+                <span class="red"></span>
+                <span class="orange"></span>
+                <span class="yellow"></span>
+                <span class="green"></span>
+                <span class="blue"></span>
             </div>
-            <div class="content">
-                <div class="custom-wrapper">
-                    <webview src="./terminal.html" frameborder="0" nodeintegration></webview>
-                </div>
+            <div class="maxbtn">
+                <span></span>
+            </div>
+            <div class="xbtn">x</div>
+        </div>
+        <div class="content">
+            <div class="custom-wrapper">
+                <webview src="./terminal.html" frameborder="0" nodeintegration></webview>
             </div>
         </div>
+    </div>
 
-        <div class="frame" id="visualiser">
-            <div class="topbar orange">
-                <div class="swatches">
-                    <span class="red"></span>
-                    <span class="orange"></span>
-                    <span class="yellow"></span>
-                    <span class="green"></span>
-                    <span class="blue"></span>
-                </div>
-                <div class="maxbtn">
-                    <span></span>
-                </div>
-                <div class="xbtn">x</div>
+    <div class="frame" id="visualiser">
+        <div class="topbar orange">
+            <div class="swatches">
+                <span class="red"></span>
+                <span class="orange"></span>
+                <span class="yellow"></span>
+                <span class="green"></span>
+                <span class="blue"></span>
             </div>
-            <div class="content">
-                <webview src="./visualiser.html" frameborder="0" nodeintegration></webview>
+            <div class="maxbtn">
+                <span></span>
             </div>
+            <div class="xbtn">x</div>
         </div>
+        <div class="content">
+            <webview src="./visualiser.html" frameborder="0" nodeintegration></webview>
+        </div>
+    </div>
 
+    <div class="hidden-module">
+        <webview src="./input-checker.html" frameborder="0" nodeintegration></webview>
+    </div>
 
     <script>
         window.$ = window.jQuery = require('jquery');
@@ -58,7 +63,6 @@
 
     <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
     <script src="js/mainview.js"></script>
-    <script src="js/input_checker.js"></script>
 </body>
 
 </html>
