@@ -20,7 +20,7 @@ function subscribe(listener, type) {
 function sendMessage(message, type) {
     let listener = listeners[type];
     for (let i = 0; i < listener.length; i++) {
-        listener[i](message);
+        listener[i](message, type);
     }
 }
 

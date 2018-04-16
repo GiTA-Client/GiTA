@@ -9,7 +9,7 @@ let prompt = ['$', '#', '+'];
  * Check if commands are safe, send message blocking terminal if not
  * @param {string} command A command to execute in a shell
  */
-function inputChecker(command) {
+function inputChecker(command, type) {
     let trimCmd = removePrompt(command);
     let safetyCheck = gitCheckForce(trimCmd);
     if (!safetyCheck.pass) {

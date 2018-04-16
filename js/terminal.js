@@ -31,9 +31,11 @@ let receiveCount = -1;
  *
  * @param {string} message Received message
  */
-function handleMessage(message) {
-    if (message === "block") {
-        isBlocked = true;
+function handleMessage(message, type) {
+    if (type === 'terminal') {
+        if (message === "block") {
+            isBlocked = true;
+        }
     }
     receiveCount += 1;
     runCommand();
