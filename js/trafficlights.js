@@ -9,7 +9,8 @@ const trafficlightpath = "res/pics/traffic-lights-";
 
 const cmdStart = "echo '<<<GITA_CMD_START>>>';";
 const historyIgnore = "history -d $(history | tail -n 1);";
-const cmdEnd = "echo '<<<GITA_CMD_END>>>';\n";
+const cmdUpdateEnd = "echo '<<<GITA_MCMD_END>>>';\n";
+const cmdMergeEnd = "echo '<<<GITA_UCMD_END>>>';\n";
 
 const branchUpdateCheck = "git fetch &> /dev/null; git status | grep 'git pull';";
 
@@ -36,12 +37,17 @@ let trafficLightsIcon = document.getElementById('trafficlights');
 
 let cmdOut = null;
 let cmdWrite = false;
-let callback;
+
+let isMergeError = false;
+let isUpdateError = false;
 
 ptyProcess.on('data', function(data) {
-    if (data.match("<<<GITA_CMD_END>>>\r\n")) {
+    if (data.match("<<<GITA_UCMD_END>>>\r\n")) {
         cmdWrite = false;
-        callback();
+        gitUpdateCallback();
+    } else if (data.match("<<<GITA_MCMD_END>>>\r\n")) {
+        cmdWrite = false;
+        gitMergeConflictCallback();
     }
     if (cmdWrite) {
         cmdOut += data;
@@ -53,27 +59,41 @@ ptyProcess.on('data', function(data) {
 });
 
 function gitUpdateCheck() {
-    callback = gitUpdateCallback;
-    ptyProcess.write(cmdStart + branchUpdateCheck + historyIgnore + cmdEnd);
+    ptyProcess.write(cmdStart + branchUpdateCheck + historyIgnore + cmdUpdateEnd);
 }
 
 function gitUpdateCallback() {
     if (cmdOut != "") {
         body.style.background = "var(--yellow)";
         trafficLightsIcon.src = trafficlightpath + "yellow.png";
+        isUpdateError = true;
+    } else {
+        isUpdateError = false;
     }
+    gitMergeConflictCheck();
 }
 
 function gitMergeConflictCheck() {
-    callback = gitMergeConflictCallback;
-    ptyProcess.write(cmdStart + stashCmd + mergeSimulateCmd + restoreStashCmd + historyIgnore + cmdEnd);
+    ptyProcess.write(cmdStart + stashCmd + mergeSimulateCmd + restoreStashCmd + historyIgnore + cmdMergeEnd);
 }
 
 function gitMergeConflictCallback() {
     if (cmdOut != "") {
         body.style.background = "var(--red)";
         trafficLightsIcon.src = trafficlightpath + "red.png";
+        isMergeError = true;
+    } else {
+        isMergeError = false;
     }
+    setGreenIfSafe();
 }
 
-// cmdOut.match("<<<GITA_CMD_START>>>[^]?[^]?<<<GITA_CMD_END>>>")[0]
+function setGreenIfSafe() {
+    if (isUpdateError && isMergeError) {
+        body.style.background = "var(--green)";
+        trafficLightsIcon.src = trafficlightpath + "green.png";
+    }
+    setTimeout(gitUpdateCheck, 500);
+}
+
+gitUpdateCheck();
