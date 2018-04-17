@@ -19,6 +19,8 @@ let ptyProcess = pty.spawn(shell, [], {
 // Initialize the front end for the shell process
 let xterm = new Terminal({
     cursorBlink: true,
+    rows: 18,
+    cols: 100
 });
 
 let commandToExecute = null;
@@ -49,7 +51,7 @@ messagebus.subscribe(handleMessage, "newcommand");
 messagebus.subscribe(handleMessage, "terminal");
 
 xterm.open(document.getElementById('terminal'));
-fit.fit(xterm);
+//fit.fit(xterm);
 
 xterm.on('data', (data) => {
     if (receiveCount > -1) return;

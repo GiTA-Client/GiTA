@@ -41,6 +41,11 @@ let cmdWrite = false;
 let isMergeError = false;
 let isUpdateError = false;
 
+function resetVars() {
+    cmdOut = "";
+    cmdWrite = true;
+}
+
 ptyProcess.on('data', function(data) {
     if (data.match("<<<GITA_UCMD_END>>>\r\n")) {
         cmdWrite = false;
@@ -59,6 +64,7 @@ ptyProcess.on('data', function(data) {
 });
 
 function gitUpdateCheck() {
+    cmdOut = "";
     ptyProcess.write(cmdStart + branchUpdateCheck + historyIgnore + cmdUpdateEnd);
 }
 
@@ -74,6 +80,7 @@ function gitUpdateCallback() {
 }
 
 function gitMergeConflictCheck() {
+    cmdOut = "";
     ptyProcess.write(cmdStart + stashCmd + mergeSimulateCmd + restoreStashCmd + historyIgnore + cmdMergeEnd);
 }
 
@@ -89,11 +96,11 @@ function gitMergeConflictCallback() {
 }
 
 function setGreenIfSafe() {
-    if (isUpdateError && isMergeError) {
+    if (!isUpdateError && !isMergeError) {
         body.style.background = "var(--green)";
         trafficLightsIcon.src = trafficlightpath + "green.png";
     }
-    setTimeout(gitUpdateCheck, 500);
+    setTimeout(gitUpdateCheck, 2000);
 }
 
 gitUpdateCheck();

@@ -16,11 +16,12 @@ function createWelcomeWindow() {
     welcomeWindow = new BrowserWindow({
         width: 700,
         height: 600,
-        frame: false,
         resizable: false,
         titleBarStyle: 'customButtonsOnHover',
         "node-integration": true
     });
+
+    welcomeWindow.setMenu(null);
 
     welcomeWindow.loadURL(url.format({
         pathname: path.join(__dirname, './welcome.html'),
