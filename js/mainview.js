@@ -21,7 +21,8 @@ $('.frame').not(".maximized").resizable({
     minWidth: 50,
     minHeight: 59
 }).draggable({
-    handle: ".topbar"
+    handle: ".topbar",
+    containment: "parent"
 });
 
 $('.swatches span').click(function () {

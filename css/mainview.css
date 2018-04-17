@@ -2,6 +2,17 @@ body {
     background: #306a9c;
     padding: 0;
     margin: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    position: fixed;
+}
+
+.app-container {
+    position: relative;
+    height: 100%;
+    flex-grow: 100;
+    float: right;
 }
 
 .frame {
@@ -19,6 +30,13 @@ body {
     padding: 5px;
     text-align: right;
     cursor: default;
+}
+
+.traffic-lights{
+    position: relative;
+    height: 100%;
+    width: 40px;
+    float: left;
 }
 
 .xbtn,

@@ -1,0 +1,16 @@
+body {
+    --green: #02b302;
+    --red: #bd0202;
+    --yellow: #cfcf03;
+    background: var(--green);
+    margin: 0;
+}
+
+#trafficlights {
+    width: 100vw;
+    height: 200vw;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
